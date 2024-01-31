@@ -586,6 +586,7 @@ pub mod reward_pool {
 #[derive(Accounts)]
 #[instruction(pool_nonce: u8)]
 pub struct InitializePool<'info> {
+    /// CHECK: is okay
     authority: UncheckedAccount<'info>,
 
     #[account(
@@ -639,6 +640,7 @@ pub struct InitializePool<'info> {
         ],
         bump = pool_nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
 
     #[account(zero)]
@@ -664,8 +666,11 @@ pub struct CreateUser<'info> {
             pool.to_account_info().key.as_ref()
         ],
         bump,
+        space = 136,
     )]
     user: Box<Account<'info, User>>,
+
+    #[account(mut)]
     owner: Signer<'info>,
     // Misc.
     system_program: Program<'info, System>,
@@ -695,6 +700,7 @@ pub struct Pause<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
 }
@@ -728,6 +734,7 @@ pub struct Unpause<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
 }
@@ -769,6 +776,7 @@ pub struct Stake<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
 
     // Misc.
@@ -820,6 +828,7 @@ pub struct Fund<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
 
     // Misc.
@@ -868,6 +877,7 @@ pub struct ClaimReward<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
 
     // Misc.
@@ -899,6 +909,7 @@ pub struct CloseUser<'info> {
 #[derive(Accounts)]
 pub struct ClosePool<'info> {
     #[account(mut)]
+    /// CHECK: is okay
     refundee: UncheckedAccount<'info>,
     #[account(mut)]
     staking_refundee: Box<Account<'info, TokenAccount>>,
@@ -934,6 +945,7 @@ pub struct ClosePool<'info> {
         ],
         bump = pool.nonce,
     )]
+    /// CHECK: is okay
     pool_signer: UncheckedAccount<'info>,
     token_program: Program<'info, Token>,
 }
